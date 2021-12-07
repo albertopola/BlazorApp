@@ -1,0 +1,54 @@
+﻿@page "/todo"
+<h3>Todo (@todos.Count(todo=>todo.IsDone))</h3>
+    
+    @foreach (var todo in todos)
+    {
+        
+            <div class="row mb-3">
+                <div class="col-md-1">
+                    <input  type="checkbox" class="form-check-input" @bind="todo.IsDone"/>
+                </div>
+                <div class="col"> 
+                    <input  type="text" class="form-control" @bind="todo.Title"/>
+                </div>
+                <div class="col">
+                    <input   type="number" class="form-control" @bind="todo.Effort"/>
+                </div>
+                <div class="col">
+                    <button class="btn btn-danger" @onclick="() => RemoveToDo(todo)">Remove</button>
+                </div>
+            </div>
+     
+    }
+
+          <div class="row mb-3">
+<div class="col">
+<input  placeholder="Something todo" class="form-control" @bind="newTodo"/>
+</div>
+<div class="col">
+<input placeholder="Effort" class="form-control" @bind="newTodoEffort"/>
+</div>
+<div class="col">
+<button class="btn btn-primary" @onclick="AddTodo">Add todo</button>
+</div>
+</div>
+
+@code {
+    private List<TodoItem> todos = new List<TodoItem>();
+        private string? newTodo;
+        private decimal newTodoEffort;
+
+        private void AddTodo()
+        {
+            if (!string.IsNullOrWhiteSpace(newTodo))
+            {
+                todos.Add(new TodoItem{Title=newTodo, Effort=newTodoEffort});
+                newTodo=string.Empty;
+                newTodoEffort=default;
+            }
+        }
+        private void RemoveToDo(TodoItem todo)
+        {
+            todos.Remove(todo);
+        }
+}

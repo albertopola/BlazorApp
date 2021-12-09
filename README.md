@@ -7,4 +7,4 @@ Free blazor webapp development
 
 This web app is based on the template described in the [Blazor Tutorial - Build your first Blazor app](https://dotnet.microsoft.com/en-us/learn/aspnet/blazor-tutorial/intro).
 
-**Change #1** - Add remove button in foreach loop.
+**Change #1** - Add a Remove button in `foreach` loop.

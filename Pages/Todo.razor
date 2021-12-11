@@ -11,9 +11,18 @@
                 <div class="col"> 
                     <input  type="text" class="form-control" @bind="todo.Title"/>
                 </div>
-                <div class="col">
-                    <input   type="number" class="form-control" @bind="todo.Effort"/>
-                </div>
+                @if (todo.Assets != null)
+                {
+                        @foreach (var res in todo.Assets)
+                        {
+                            <div class="col"> 
+                                <input  type="text" class="form-control" @bind="res.AssetName"/>
+                            </div>
+                            <div class="col"> 
+                                <input  type="decimal" class="form-control" @bind="res.AssetEffort"/>
+                            </div>
+                        }
+                }
                 <div class="col">
                     <button class="btn btn-danger" @onclick="() => RemoveToDo(todo)">Remove</button>
                 </div>
@@ -25,9 +34,11 @@
 <div class="col">
 <input  placeholder="Something todo" class="form-control" @bind="newTodo"/>
 </div>
+<!--
 <div class="col">
 <input placeholder="Effort" class="form-control" @bind="newTodoEffort"/>
 </div>
+!-->
 <div class="col">
 <button class="btn btn-primary" @onclick="AddTodo">Add todo</button>
 </div>
@@ -42,7 +53,7 @@
         {
             if (!string.IsNullOrWhiteSpace(newTodo))
             {
-                todos.Add(new TodoItem{Title=newTodo, Effort=newTodoEffort});
+                todos.Add(new TodoItem{Title=newTodo});
                 newTodo=string.Empty;
                 newTodoEffort=default;
             }
